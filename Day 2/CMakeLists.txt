@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
-project(AoC-Day1)
+project(AoC-Day2)
 
 set(INPUT_PATH "${CMAKE_SOURCE_DIR}/input.txt")
-set(AOC_DAY 1)
+set(AOC_DAY 2)
 
 configure_file (myconfig.h.in myconfig.h @ONLY)
 
