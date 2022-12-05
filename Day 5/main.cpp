@@ -27,6 +27,7 @@ StackArray getStacksFromInput(std::ifstream& input){
         if('1' == line[firstStackPos]) continue;
         for(std::size_t i{0}; i<nOfStacks; i++){
              if(' ' == line[firstStackPos + stackSpacing * i]) continue;
+             if(line.size()<=(firstStackPos + stackSpacing * i)) break;
              buffer[i].push_back(line[firstStackPos + stackSpacing * i]);
         }
     }
@@ -51,7 +52,6 @@ void part1(std::ifstream& input){
         ss<<line;
         ss>>dump>>count>>dump>>stackFrom>>dump>>stackTo;
         ss.clear();
-        std::cout<<line<<' '<<count<<' '<<stackFrom<<' '<<stackTo<<'\n';
         for(int i{0}; i < count; i++){
             stacks[stackTo-1].push(stacks[stackFrom-1].top());
             stacks[stackFrom-1].pop();
@@ -70,22 +70,21 @@ void part2(std::ifstream& input){
     std::string dump;
     std::stack<char> tmpStack{};
     int count, stackFrom, stackTo;
+
     while(std::getline(input, line)){
         if(line.empty()) continue;
         ss<<line;
         ss>>dump>>count>>dump>>stackFrom>>dump>>stackTo;
         ss.clear();
-        std::cout<<line<<'|'<<count<<' '<<stackFrom<<' '<<stackTo<<'\n';
+        stackFrom--;
+        stackTo--;
         for(int i{0}; i < count; i++){
-            tmpStack.push(stacks[stackFrom-1].top());
-            stacks[stackFrom-1].pop();
+            tmpStack.push(stacks[stackFrom].top());
+            stacks[stackFrom].pop();
         }
         for(int i{0}; i < count; i++){
-            stacks[stackTo-1].push(tmpStack.top());
+            stacks[stackTo].push(tmpStack.top());
             tmpStack.pop();
-        }
-        if(not tmpStack.empty()){
-            throw(std::runtime_error("You fucked up"));
         }
     }
     for(std::size_t i{0}; i<nOfStacks; i++){
