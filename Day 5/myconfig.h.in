@@ -1,0 +1,8 @@
+//
+// Created by harrry on 01.12.22.
+//
+
+#pragma once
+
+#define AOC_DAY "@AOC_DAY@"
+#define INPUT_PATH "@INPUT_PATH@"
